@@ -23,6 +23,7 @@ public class FloatingWindow extends Service {
     private WindowManager wm;
     private LinearLayout ll;
     private Button stop;
+    private Button touch;
 
     @Nullable
     @Override
@@ -37,12 +38,15 @@ public class FloatingWindow extends Service {
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         ll = new LinearLayout(this);
         stop = new Button(this);
+        touch = new Button(this);
 
-        ViewGroup.LayoutParams btnParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams stopParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         stop.setText("Stop");
-        stop.setLayoutParams(btnParams);
+        stop.setLayoutParams(stopParams);
 
-
+        ViewGroup.LayoutParams touchParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        touch.setText("Touch");
+        touch.setLayoutParams(touchParams);
 
         LinearLayout.LayoutParams llParameters = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
         ll.setBackgroundColor(Color.argb(66,256,00,0));
@@ -56,6 +60,7 @@ public class FloatingWindow extends Service {
         parameters.gravity = Gravity.CENTER | Gravity.CENTER;
 
         ll.addView(stop);
+        ll.addView(touch);
         wm.addView(ll,parameters);
 
         ll.setOnTouchListener(new View.OnTouchListener() {
